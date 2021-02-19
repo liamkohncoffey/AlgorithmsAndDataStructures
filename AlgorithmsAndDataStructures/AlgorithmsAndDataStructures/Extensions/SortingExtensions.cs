@@ -4,6 +4,24 @@ namespace AlgorithmsAndDataStructures.Extensions
 {
     public static class SortingExtensions
     {
+        public static void BubbleSort(this int[] arrayNumbers)
+        {
+            for (var i = 1; i < arrayNumbers.Length; i++)
+            {
+                for (var j = arrayNumbers.Length - 1; j >= i; j--)
+                {
+                    if (arrayNumbers[j] < arrayNumbers[j - 1])
+                    {
+                        var temp = arrayNumbers[j];
+                        arrayNumbers[j] = arrayNumbers[j - 1];
+                        arrayNumbers[j - 1] = temp;
+                        Console.WriteLine(String.Join(",", arrayNumbers));
+                    }
+                }
+            }
+        }
+
+        
         private static void SelectionSort(this int[] arrayNumbers)
         {
             for (var j = 0; j < arrayNumbers.Length; j++)

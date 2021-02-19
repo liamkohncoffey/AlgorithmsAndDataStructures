@@ -20,7 +20,7 @@ namespace AlgorithmsAndDataStructures
             StopWatch.Start();
             Console.WriteLine(String.Join(",", ArrayNumbers));
             
-            ArrayNumbers.MergeSort();
+            ArrayNumbers.BubbleSort();
 
             Console.WriteLine(String.Join(",", ArrayNumbers));
             Console.WriteLine("RunTime " + StopWatch.StopAndConsoleWriteLine());
