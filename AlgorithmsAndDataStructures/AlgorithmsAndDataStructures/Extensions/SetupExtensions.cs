@@ -17,11 +17,6 @@ namespace AlgorithmsAndDataStructures.Extensions
 
         public static int[] GenerateArrayOfNumbers(this int[] arrayOfNumbers, int length)
         {
-            if (arrayOfNumbers == null)
-            {
-                throw new ArgumentNullException(nameof(arrayOfNumbers));   
-            }
-
             arrayOfNumbers  = new int[length]; 
 
             Random randNum = new Random();

@@ -11,7 +11,7 @@ namespace AlgorithmsAndDataStructures
 
         static Program()
         {
-            ArrayNumbers = ArrayNumbers.GenerateArrayOfNumbers(100000);
+            ArrayNumbers = ArrayNumbers.GenerateArrayOfNumbers(10);
             StopWatch = new Stopwatch();
         }
         
@@ -20,11 +20,8 @@ namespace AlgorithmsAndDataStructures
             StopWatch.Start();
             Console.WriteLine(String.Join(",", ArrayNumbers));
             
-            
             ArrayNumbers.MergeSort();
-            //arrayNumbers.SelectionSort();
-            
-            
+
             Console.WriteLine(String.Join(",", ArrayNumbers));
             Console.WriteLine("RunTime " + StopWatch.StopAndConsoleWriteLine());
             Console.WriteLine("Done");

@@ -86,10 +86,10 @@ namespace AlgorithmsAndDataStructures.Extensions
             var q = (p + r) / 2;
             arrayNumbers.MergeSortRecursion(p, q);
             arrayNumbers.MergeSortRecursion( q + 1, r);
-            Merge(arrayNumbers, p, q, r);
+            MergeWithoutSentinels(arrayNumbers, p, q, r);
         }
 
-        private static void Merge(this int[] arrayNumbers, int p, int q, int r)
+        private static void MergeWithSentinels(this int[] arrayNumbers, int p, int q, int r)
         {
             var n1 = q - p + 1;
             var n2 = r - q;
@@ -115,6 +115,56 @@ namespace AlgorithmsAndDataStructures.Extensions
 
             for (int k = p; k <= r; k++)
             {
+                if (leftArray[i] <= rightArray[j])
+                {
+                    arrayNumbers[k] = leftArray[i];
+                    i = i + 1;
+                }
+                else
+                {
+                    arrayNumbers[k] = rightArray[j];
+                    j = j + 1;
+                }
+            }
+        }
+        
+        private static void MergeWithoutSentinels(this int[] arrayNumbers, int p, int q, int r)
+        {
+            var n1 = q - p + 1;
+            var n2 = r - q;
+
+            var leftArray = new int[n1];
+            var rightArray = new int[n2];
+
+            for (int l = 1; l < n1 + 1; l++)
+            {
+                leftArray[l - 1] = arrayNumbers[p + l - 1];
+            }
+            
+            for (int k = 1; k < n2 + 1; k++)
+            {
+                rightArray[k - 1] = arrayNumbers[q + k];
+            }
+
+            var i = 0;
+            var j = 0;
+
+            for (int k = p; k <= r; k++)
+            {
+                if (i == leftArray.Length)
+                {
+                    arrayNumbers[k] = rightArray[j];
+                    j = j + 1;
+                    continue;
+                }
+                
+                if (j == rightArray.Length)
+                {
+                    arrayNumbers[k] = leftArray[i];
+                    i = i + 1;
+                    continue;
+                }
+                
                 if (leftArray[i] <= rightArray[j])
                 {
                     arrayNumbers[k] = leftArray[i];
