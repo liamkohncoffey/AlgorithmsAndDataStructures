@@ -6,14 +6,19 @@ namespace AlgorithmsAndDataStructures
     {
         static void Main(string[] args)
         {
-            var arrayNumbers = GenerateArrayOfNumbers(20, 0, 20);
+            var arrayNumbers = //new int[]
+            //{
+            //    2,4,5,7,1,2,3,6
+            //};
+            GenerateArrayOfNumbers(20, 0, 20);
             
             
-            arrayNumbers.MergeSort(5, 10, 15 );
+            Console.WriteLine(String.Join(",", arrayNumbers));
+            arrayNumbers.MergeSort(0, arrayNumbers.Length - 1);
+            //arrayNumbers.SelectionSort();
+            //arrayNumbers.Merge(0, 4, 8);
 
-            arrayNumbers.SelectionSort();
-
-
+            Console.WriteLine(String.Join(",", arrayNumbers));
             Console.WriteLine("Done");
             Console.ReadKey();
         }
@@ -108,7 +113,20 @@ namespace AlgorithmsAndDataStructures
             }
         }
 
-        private static void MergeSort(this int[] arrayNumbers, int p, int q, int r)
+        private static void MergeSort(this int[] arrayNumbers, int p, int r)
+        {
+            if (p >= r)
+            {
+                return;
+            }
+
+            var q = (p + r) / 2;
+            arrayNumbers.MergeSort(p, q);
+            arrayNumbers.MergeSort( q + 1, r);
+            Merge(arrayNumbers, p, q, r);
+        }
+        
+        private static void Merge(this int[] arrayNumbers, int p, int q, int r)
         {
             var n1 = q - p + 1;
             var n2 = r - q;
@@ -116,40 +134,37 @@ namespace AlgorithmsAndDataStructures
             var leftArray = new int[n1 + 1];
             var rightArray = new int[n2 + 1];
 
-            for (int l = 1; l < n1; l++)
+            for (int l = 1; l < n1 + 1; l++)
             {
-                
-                leftArray[l] = arrayNumbers[p + l - 1];
-                Console.WriteLine(String.Join(",", leftArray));
+                leftArray[l - 1] = arrayNumbers[p + l - 1];
             }
             
-            for (int k = 1; k < n2; k++)
+            for (int k = 1; k < n2 + 1; k++)
             {
-                rightArray[k] = arrayNumbers[q + k];
-                Console.WriteLine(String.Join(",", rightArray));
+                rightArray[k - 1] = arrayNumbers[q + k];
             }
             
             leftArray[n1] = Int32.MaxValue;
             rightArray[n2] = Int32.MaxValue;
 
-            var i = 1;
-            var j = 1;
+            var i = 0;
+            var j = 0;
 
-            for (int k = p; k < r; k++)
+            for (int k = p; k <= r; k++)
             {
                 if (leftArray[i] <= rightArray[j])
                 {
                     arrayNumbers[k] = leftArray[i];
-                    Console.WriteLine(String.Join(",", arrayNumbers));
-                    i += 1;
+                    i = i + 1;
                 }
-                else if(arrayNumbers[k] == rightArray[j])
+                else
                 {
+                    arrayNumbers[k] = rightArray[j];
                     j = j + 1;
-                    Console.WriteLine(String.Join(",", rightArray));
                 }
                     
             }
+            Console.WriteLine("ArrayOfNumbers:" + String.Join(",", arrayNumbers));
             
         }
     }
